@@ -1,0 +1,13 @@
+{
+  "itemGroup.mazed": "Mazed Items",
+  "block.mazed.maze_portal": "Maze Portal",
+  "item.mazed.maze_rod": "Maze Rod",
+
+  "mazed.configuration.title": "Mazed Configs",
+  "mazed.configuration.section.mazed.common.toml": "Mazed Configs",
+  "mazed.configuration.section.mazed.common.toml.title": "Mazed Configs",
+  "mazed.configuration.items": "Item List",
+  "mazed.configuration.logDirtBlock": "Log Dirt Block",
+  "mazed.configuration.magicNumberIntroduction": "Magic Number Text",
+  "mazed.configuration.magicNumber": "Magic Number"
+}

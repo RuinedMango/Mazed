@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "com.ruinedmango.mazed.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+	"BaseFireBlockMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

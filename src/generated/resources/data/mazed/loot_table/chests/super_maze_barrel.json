@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:chest",
+  "functions": [
+    {
+      "add": false,
+      "count": 30.0,
+      "function": "minecraft:set_count"
+    }
+  ],
+  "pools": [
+    {
+      "bonus_rolls": 3.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:diamond"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 20.0,
+        "min": 10.0
+      }
+    }
+  ],
+  "random_sequence": "mazed:chests/super_maze_barrel"
+}

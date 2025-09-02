@@ -1,0 +1,10 @@
+{
+  "type": "mazed:mazedim_type", 
+  "generator": {
+    "type": "mazed:maze",
+    "biome_source": {
+      "type": "fixed",
+      "biome": "mazed:maze_biome"
+    }
+  }
+}
