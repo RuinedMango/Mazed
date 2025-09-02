@@ -1,6 +1,7 @@
 package com.ruinedmango.mazed.feature;
 
 import com.mojang.serialization.Codec;
+import com.ruinedmango.mazed.datagen.MazedLootTableProvider;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -31,6 +32,37 @@ public class MazeChestFeature extends Feature<NoneFeatureConfiguration> {
 		// 1) write the block into the worldgen level
 		BlockState chestState = Blocks.CHEST.defaultBlockState();
 		world.setBlock(chestPos, chestState, 3);
+
+		if (chestPos.getY() > 105) {
+			RandomizableContainer.setBlockEntityLootTable(world, random, chestPos,
+					MazedLootTableProvider.MAZE_CHEST_TIER1);
+			return true;
+		}
+		if (chestPos.getY() > 84) {
+			RandomizableContainer.setBlockEntityLootTable(world, random, chestPos,
+					MazedLootTableProvider.MAZE_CHEST_TIER2);
+			return true;
+		}
+		if (chestPos.getY() > 63) {
+			RandomizableContainer.setBlockEntityLootTable(world, random, chestPos,
+					MazedLootTableProvider.MAZE_CHEST_TIER3);
+			return true;
+		}
+		if (chestPos.getY() > 42) {
+			RandomizableContainer.setBlockEntityLootTable(world, random, chestPos,
+					MazedLootTableProvider.MAZE_CHEST_TIER4);
+			return true;
+		}
+		if (chestPos.getY() > 21) {
+			RandomizableContainer.setBlockEntityLootTable(world, random, chestPos,
+					MazedLootTableProvider.MAZE_CHEST_TIER5);
+			return true;
+		}
+		if (chestPos.getY() > 0) {
+			RandomizableContainer.setBlockEntityLootTable(world, random, chestPos,
+					MazedLootTableProvider.MAZE_CHEST_TIER6);
+			return true;
+		}
 
 		RandomizableContainer.setBlockEntityLootTable(world, random, chestPos, BuiltInLootTables.ABANDONED_MINESHAFT);
 		return true;

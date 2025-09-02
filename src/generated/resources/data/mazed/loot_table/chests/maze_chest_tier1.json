@@ -1,0 +1,62 @@
+{
+  "type": "minecraft:chest",
+  "functions": [
+    {
+      "function": "minecraft:enchant_randomly",
+      "options": "minecraft:unbreaking"
+    }
+  ],
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:apple"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:bread"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 3.0,
+        "min": 2.0
+      }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:cobblestone"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 14.0,
+        "min": 12.0
+      }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:stick"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:wooden_pickaxe"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 2.0,
+        "min": 1.0
+      }
+    }
+  ],
+  "random_sequence": "mazed:chests/maze_chest_tier1"
+}

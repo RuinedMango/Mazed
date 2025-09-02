@@ -1,2 +1,3 @@
-// 1.21.8	2025-09-01T20:43:21.5759237	Loot Tables
-f9ef7f5db213ed8f832080db88b7fd831da1442d data/mazed/loot_table/chests/super_maze_barrel.json
+// 1.21.8	2025-09-01T23:52:45.010097	Loot Tables
+35661a170178d4b6c07ce43db46617a6948d38d1 data/mazed/loot_table/chests/maze_chest_tier1.json
+02ca886b89a14197544c53c43ff831d94a805fee data/mazed/loot_table/chests/super_maze_barrel.json
