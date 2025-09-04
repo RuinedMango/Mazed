@@ -22,7 +22,7 @@ public class MazeExitFeature extends Feature<NoneFeatureConfiguration> {
 		WorldGenLevel world = context.level();
 		BlockPos origin = context.origin();
 
-		world.setBlock(origin, BlockRegistry.MAZE_PORTAL.get().defaultBlockState(),
+		world.setBlock(origin, BlockRegistry.EXIT_MAZE_PORTAL.get().defaultBlockState(),
 				Block.UPDATE_NONE | Block.UPDATE_SUPPRESS_DROPS);
 		return true;
 	}

@@ -138,8 +138,7 @@ public class MazePortalShape {
 			for (int z = rightWidth; z <= leftWidth; z++) {
 				for (int y = downHeight; y <= upHeight; y++) {
 					if (z != rightWidth && z != leftWidth && y != downHeight && y != upHeight) {
-						level.setBlockAndUpdate(ptr.offset(0, y, z),
-								BlockRegistry.MAZE_PORTAL.get().defaultBlockState());
+						level.setBlock(ptr.offset(0, y, z), BlockRegistry.MAZE_PORTAL.get().defaultBlockState(), 2);
 					}
 				}
 			}
@@ -147,8 +146,7 @@ public class MazePortalShape {
 			for (int x = rightWidth; x <= leftWidth; x++) {
 				for (int y = downHeight; y <= upHeight; y++) {
 					if (x != rightWidth && x != leftWidth && y != downHeight && y != upHeight) {
-						level.setBlockAndUpdate(ptr.offset(x, y, 0),
-								BlockRegistry.MAZE_PORTAL.get().defaultBlockState());
+						level.setBlock(ptr.offset(x, y, 0), BlockRegistry.MAZE_PORTAL.get().defaultBlockState(), 2);
 					}
 				}
 			}

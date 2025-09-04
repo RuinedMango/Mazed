@@ -16,9 +16,15 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class BlockRegistry {
 	private static final DeferredRegister.Blocks REGISTER = DeferredRegister.createBlocks(Mazed.MODID);
 
-	public static final DeferredBlock<Block> MAZE_PORTAL = REGISTER.register("maze_portal",
+	public static final DeferredBlock<Block> MAZE_PORTAL = REGISTER
+			.register("maze_portal",
+					() -> new MazePortalBlock(Properties.ofFullCopy(Blocks.END_PORTAL).setId(
+							ResourceKey.create(Registries.BLOCK, ResourceLocation.parse(Mazed.MODID + ":maze_portal"))),
+							false));
+	public static final DeferredBlock<Block> EXIT_MAZE_PORTAL = REGISTER.register("exit_maze_portal",
 			() -> new MazePortalBlock(Properties.ofFullCopy(Blocks.END_PORTAL).setId(
-					ResourceKey.create(Registries.BLOCK, ResourceLocation.parse(Mazed.MODID + ":maze_portal")))));
+					ResourceKey.create(Registries.BLOCK, ResourceLocation.parse(Mazed.MODID + ":exit_maze_portal"))),
+					true));
 
 	public static void register(IEventBus eventBus) {
 		REGISTER.register(eventBus);

@@ -2,9 +2,12 @@ package com.ruinedmango.mazed.block;
 
 import java.util.Set;
 
+import javax.annotation.Nullable;
+
 import com.mojang.serialization.MapCodec;
 import com.ruinedmango.mazed.Mazed;
 import com.ruinedmango.mazed.block.entity.MazePortalBlockEntity;
+import com.ruinedmango.mazed.registries.BlockRegistry;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -14,16 +17,20 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.entity.Relative;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Portal;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.portal.TeleportTransition;
+import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -33,8 +40,13 @@ public class MazePortalBlock extends BaseEntityBlock implements Portal {
 	private static final VoxelShape SHAPE = Block.column(16.0, 0.0, 16.0);
 	ResourceKey<Level> maze_key = ResourceKey.create(Registries.DIMENSION,
 			ResourceLocation.fromNamespaceAndPath(Mazed.MODID, "mazedim"));
+	private boolean isExit = false;
 
 	public MazePortalBlock(Properties p_49795_) {
+		super(p_49795_);
+	}
+
+	public MazePortalBlock(Properties p_49795_, boolean isExit) {
 		super(p_49795_);
 	}
 
@@ -43,6 +55,58 @@ public class MazePortalBlock extends BaseEntityBlock implements Portal {
 			InsideBlockEffectApplier p_405383_) {
 		if (p_54918_.canUsePortal(false)) {
 			p_54918_.setAsInsidePortal(this, p_54917_);
+		}
+	}
+
+	public boolean isCompatible(Block block) {
+		return block == Blocks.STONE_BRICKS || block == BlockRegistry.MAZE_PORTAL.get();
+	}
+
+	@Override
+	public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock,
+			@Nullable Orientation orientation, boolean movedByPiston) {
+		if (!isExit) {
+			boolean zoriented = false;
+			if (isCompatible(level.getBlockState(pos.east()).getBlock())
+					&& isCompatible(level.getBlockState(pos.west()).getBlock())) {
+				zoriented = true;
+			}
+			if (isCompatible(level.getBlockState(pos.north()).getBlock())
+					&& isCompatible(level.getBlockState(pos.south()).getBlock())) {
+				zoriented = false;
+			}
+			int surrounding = 0;
+			if (zoriented) {
+				if (isCompatible(level.getBlockState(pos.east()).getBlock())) {
+					surrounding++;
+				}
+				if (isCompatible(level.getBlockState(pos.west()).getBlock())) {
+					surrounding++;
+				}
+				if (isCompatible(level.getBlockState(pos.above()).getBlock())) {
+					surrounding++;
+				}
+				if (isCompatible(level.getBlockState(pos.below()).getBlock())) {
+					surrounding++;
+				}
+			}
+			if (!zoriented) {
+				if (isCompatible(level.getBlockState(pos.south()).getBlock())) {
+					surrounding++;
+				}
+				if (isCompatible(level.getBlockState(pos.north()).getBlock())) {
+					surrounding++;
+				}
+				if (isCompatible(level.getBlockState(pos.above()).getBlock())) {
+					surrounding++;
+				}
+				if (isCompatible(level.getBlockState(pos.below()).getBlock())) {
+					surrounding++;
+				}
+			}
+			if (surrounding < 4) {
+				level.destroyBlock(pos, false);
+			}
 		}
 	}
 
@@ -59,7 +123,7 @@ public class MazePortalBlock extends BaseEntityBlock implements Portal {
 
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return new MazePortalBlockEntity(pos, state);
+		return new MazePortalBlockEntity(pos, state, isExit);
 	}
 
 	@Override
@@ -76,6 +140,12 @@ public class MazePortalBlock extends BaseEntityBlock implements Portal {
 	protected VoxelShape getEntityInsideCollisionShape(BlockState p_371319_, BlockGetter p_399758_, BlockPos p_371244_,
 			Entity p_399952_) {
 		return p_371319_.getShape(p_399758_, p_371244_);
+	}
+
+	@Override
+	protected ItemStack getCloneItemStack(LevelReader p_304768_, BlockPos p_53004_, BlockState p_53005_,
+			boolean p_387386_) {
+		return ItemStack.EMPTY;
 	}
 
 	@Override
