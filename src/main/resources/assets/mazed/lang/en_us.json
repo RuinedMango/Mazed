@@ -1,6 +1,7 @@
 {
   "itemGroup.mazed": "Mazed Items",
   "block.mazed.maze_portal": "Maze Portal",
+  "block.mazed.exit_maze_portal": "Exit Maze Portal",
   "item.mazed.maze_rod": "Maze Rod",
 
   "mazed.configuration.title": "Mazed Configs",

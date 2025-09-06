@@ -16,10 +16,6 @@ public class MazePortalBlockEntity extends BlockEntity {
 		// TODO Auto-generated constructor stub
 	}
 
-	public MazePortalBlockEntity(BlockPos pos, BlockState blockState) {
-		this(BlockEntityRegistry.MAZE_PORTAL_ENTITY.get(), pos, blockState);
-	}
-
 	public MazePortalBlockEntity(BlockPos pos, BlockState blockState, boolean isExit) {
 		this(isExit ? BlockEntityRegistry.EXIT_MAZE_PORTAL_ENTITY.get() : BlockEntityRegistry.MAZE_PORTAL_ENTITY.get(),
 				pos, blockState);
@@ -28,7 +24,8 @@ public class MazePortalBlockEntity extends BlockEntity {
 
 	public boolean shouldRenderFace(Direction face) {
 		if (isExit) {
-			return face.getAxis() == Direction.Axis.Y;
+			return Direction.fromAxisAndDirection(face.getAxis(), face.getAxisDirection()) == Direction.Axis.Y
+					.getNegative();
 		}
 		if (!isExit) {
 			return face.getAxis() != Direction.Axis.Y;

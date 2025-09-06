@@ -48,6 +48,7 @@ public class MazePortalBlock extends BaseEntityBlock implements Portal {
 
 	public MazePortalBlock(Properties p_49795_, boolean isExit) {
 		super(p_49795_);
+		this.isExit = isExit;
 	}
 
 	@Override
@@ -113,12 +114,45 @@ public class MazePortalBlock extends BaseEntityBlock implements Portal {
 	@Override
 	public TeleportTransition getPortalDestination(ServerLevel level, Entity entity, BlockPos pos) {
 		ResourceKey<Level> resourcekey = level.dimension() == maze_key ? Level.OVERWORLD : maze_key;
+		if (level.dimension() == Level.OVERWORLD) {
+			entity.getPersistentData().putInt("maze_entry_x", pos.getX());
+			entity.getPersistentData().putInt("maze_entry_y", pos.getY());
+			entity.getPersistentData().putInt("maze_entry_z", pos.getZ());
+		}
 		ServerLevel serverlevel = level.getServer().getLevel(resourcekey);
 		float f = level.getSharedSpawnAngle();
 		Set<Relative> set = Relative.union(Relative.DELTA, Relative.ROTATION);
-		Vec3 vec3 = level.getSharedSpawnPos().getBottomCenter();
+		Vec3 vec3 = null;
+		if (level.dimension() == maze_key) {
+			vec3 = findNearestSafePos(serverlevel,
+					new BlockPos(entity.getPersistentData().getIntOr("maze_entry_x", 0),
+							entity.getPersistentData().getIntOr("maze_entry_y", 100),
+							entity.getPersistentData().getIntOr("maze_entry_z", 0)),
+					32).getBottomCenter();
+		} else {
+			vec3 = findNearestSafePos(serverlevel, new BlockPos(0, 124, 0), 32).getBottomCenter();
+		}
 		return new TeleportTransition(serverlevel, vec3, Vec3.ZERO, f, 0.0F, set,
 				TeleportTransition.PLAY_PORTAL_SOUND.then(TeleportTransition.PLACE_PORTAL_TICKET));
+	}
+
+	private static boolean isSafe(ServerLevel level, BlockPos pos) {
+		return level.getBlockState(pos).isAir() && level.getBlockState(pos.above()).isAir()
+				&& level.getBlockState(pos.below()).isSolidRender();
+	}
+
+	private static BlockPos findNearestSafePos(ServerLevel level, BlockPos center, int maxRadius) {
+		if (isSafe(level, center))
+			return center;
+
+		for (int r = 1; r <= maxRadius; r++) {
+			for (BlockPos pos : BlockPos.betweenClosed(center.offset(-r, -r, -r), center.offset(r, r, r))) {
+				if (isSafe(level, pos)) {
+					return pos;
+				}
+			}
+		}
+		return center; // fallback if nothing found
 	}
 
 	@Override

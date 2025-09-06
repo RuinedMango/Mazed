@@ -31,6 +31,7 @@ public class MazedClient {
 	@SubscribeEvent
 	public static void registerBER(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerBlockEntityRenderer(BlockEntityRegistry.MAZE_PORTAL_ENTITY.get(), MazePortalRenderer::new);
+		event.registerBlockEntityRenderer(BlockEntityRegistry.EXIT_MAZE_PORTAL_ENTITY.get(), MazePortalRenderer::new);
 	}
 
 	@SubscribeEvent
