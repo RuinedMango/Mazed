@@ -22,7 +22,7 @@ public class EntityRegistry {
 			ResourceLocation.fromNamespaceAndPath("mazed", "mazecrawler"));
 
 	public static final Supplier<EntityType<MazeCrawlerEntity>> MAZECRAWLER = REGISTER.register("mazecrawler",
-			() -> EntityType.Builder.of(MazeCrawlerEntity::new, MobCategory.CREATURE).sized(0.75f, 0.35f)
+			() -> EntityType.Builder.of(MazeCrawlerEntity::new, MobCategory.MONSTER).sized(0.75f, 0.35f)
 					.build(MAZECRAWLER_KEY));
 
 	public static void register(IEventBus eventBus) {
