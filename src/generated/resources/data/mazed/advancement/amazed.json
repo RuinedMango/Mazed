@@ -1,0 +1,27 @@
+{
+  "criteria": {
+    "amazed": {
+      "trigger": "mazed:amazed_trigger"
+    }
+  },
+  "display": {
+    "background": "minecraft:gui/advancements/backgrounds/stone",
+    "description": {
+      "translate": "advancement.mazed.amazed_desc"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:stone_bricks"
+    },
+    "title": {
+      "translate": "advancement.mazed.amazed"
+    }
+  },
+  "requirements": [
+    [
+      "amazed"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

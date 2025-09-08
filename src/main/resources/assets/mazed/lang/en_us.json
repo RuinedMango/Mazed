@@ -5,12 +5,11 @@
   "item.mazed.maze_rod": "Maze Rod",
   "entity.mazed.mazecrawler": "Maze Crawler",
   "entity.mazed.mazespectre": "Maze Spectre",
+  
+  "advancement.mazed.amazed": "aMAZEd",
+  "advancement.mazed.amazed_desc": "You've been aMAZEd!",
 
   "mazed.configuration.title": "Mazed Configs",
   "mazed.configuration.section.mazed.common.toml": "Mazed Configs",
-  "mazed.configuration.section.mazed.common.toml.title": "Mazed Configs",
-  "mazed.configuration.items": "Item List",
-  "mazed.configuration.logDirtBlock": "Log Dirt Block",
-  "mazed.configuration.magicNumberIntroduction": "Magic Number Text",
-  "mazed.configuration.magicNumber": "Magic Number"
+  "mazed.configuration.section.mazed.common.toml.title": "Mazed Configs"
 }

@@ -8,12 +8,14 @@ import com.mojang.serialization.MapCodec;
 import com.ruinedmango.mazed.Mazed;
 import com.ruinedmango.mazed.block.entity.MazePortalBlockEntity;
 import com.ruinedmango.mazed.registries.BlockRegistry;
+import com.ruinedmango.mazed.registries.CriteriaRegistry;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.entity.Relative;
@@ -38,7 +40,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class MazePortalBlock extends BaseEntityBlock implements Portal {
 	public static final MapCodec<MazePortalBlock> CODEC = simpleCodec(MazePortalBlock::new);
 	private static final VoxelShape SHAPE = Block.column(16.0, 0.0, 16.0);
-	ResourceKey<Level> maze_key = ResourceKey.create(Registries.DIMENSION,
+	static ResourceKey<Level> maze_key = ResourceKey.create(Registries.DIMENSION,
 			ResourceLocation.fromNamespaceAndPath(Mazed.MODID, "mazedim"));
 	private boolean isExit = false;
 
@@ -113,6 +115,10 @@ public class MazePortalBlock extends BaseEntityBlock implements Portal {
 
 	@Override
 	public TeleportTransition getPortalDestination(ServerLevel level, Entity entity, BlockPos pos) {
+		return getPortalDestinationUtil(level, entity, pos);
+	}
+
+	public static TeleportTransition getPortalDestinationUtil(ServerLevel level, Entity entity, BlockPos pos) {
 		ResourceKey<Level> resourcekey = level.dimension() == maze_key ? Level.OVERWORLD : maze_key;
 		if (level.dimension() == Level.OVERWORLD) {
 			entity.getPersistentData().putInt("maze_entry_x", pos.getX());
@@ -131,6 +137,11 @@ public class MazePortalBlock extends BaseEntityBlock implements Portal {
 					32).getBottomCenter();
 		} else {
 			vec3 = findNearestSafePos(serverlevel, new BlockPos(0, 124, 0), 32).getBottomCenter();
+		}
+		if (!level.isClientSide) {
+			if (entity instanceof ServerPlayer pl) {
+				CriteriaRegistry.AMAZED_TRIGGER.get().trigger(pl);
+			}
 		}
 		return new TeleportTransition(serverlevel, vec3, Vec3.ZERO, f, 0.0F, set,
 				TeleportTransition.PLAY_PORTAL_SOUND.then(TeleportTransition.PLACE_PORTAL_TICKET));

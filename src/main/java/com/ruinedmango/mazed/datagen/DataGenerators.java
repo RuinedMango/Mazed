@@ -9,6 +9,7 @@ import com.ruinedmango.mazed.Mazed;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.advancements.AdvancementProvider;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -28,6 +29,8 @@ public class DataGenerators {
 		generator.addProvider(true, new LootTableProvider(packOutput, Collections.emptySet(), List
 				.of(new LootTableProvider.SubProviderEntry(MazedLootTableProvider::new, LootContextParamSets.CHEST)),
 				lookupProvider));
+		generator.addProvider(true,
+				new AdvancementProvider(packOutput, lookupProvider, List.of(new MazedAdvancementProvider())));
 	}
 
 	@SubscribeEvent
@@ -41,5 +44,7 @@ public class DataGenerators {
 		generator.addProvider(true, new LootTableProvider(packOutput, Collections.emptySet(), List
 				.of(new LootTableProvider.SubProviderEntry(MazedLootTableProvider::new, LootContextParamSets.CHEST)),
 				lookupProvider));
+		generator.addProvider(true,
+				new AdvancementProvider(packOutput, lookupProvider, List.of(new MazedAdvancementProvider())));
 	}
 }

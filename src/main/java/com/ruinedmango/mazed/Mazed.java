@@ -7,6 +7,7 @@ import com.ruinedmango.mazed.registries.BlockEntityRegistry;
 import com.ruinedmango.mazed.registries.BlockRegistry;
 import com.ruinedmango.mazed.registries.ChunkGeneratorRegistry;
 import com.ruinedmango.mazed.registries.CreativeTabRegistry;
+import com.ruinedmango.mazed.registries.CriteriaRegistry;
 import com.ruinedmango.mazed.registries.EntityRegistry;
 import com.ruinedmango.mazed.registries.FeatureRegistry;
 import com.ruinedmango.mazed.registries.ItemRegistry;
@@ -37,6 +38,7 @@ public class Mazed {
 		FeatureRegistry.register(modEventBus);
 		ChunkGeneratorRegistry.register(modEventBus);
 		EntityRegistry.register(modEventBus);
+		CriteriaRegistry.register(modEventBus);
 
 		NeoForge.EVENT_BUS.register(this);
 

@@ -1,11 +1,9 @@
 package com.ruinedmango.mazed.item;
 
-import com.ruinedmango.mazed.Mazed;
+import com.ruinedmango.mazed.block.MazePortalBlock;
 
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -21,10 +19,15 @@ public class MazeRod extends Item {
 
 	@Override
 	public InteractionResult use(Level level, Player player, InteractionHand hand) {
-		ServerLevel dim = level.getServer().getLevel(
-				ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath(Mazed.MODID, "maze")));
-		player.teleportTo(dim, 0, 130, 0, null, 0, 0, true);
-		return InteractionResult.PASS;
+		if (!level.isClientSide()) {
+			if (player instanceof ServerPlayer sp) {
+				if (level instanceof ServerLevel sl) {
+					sp.teleport(MazePortalBlock.getPortalDestinationUtil(sl, player, sp.getOnPos()));
+					return InteractionResult.PASS;
+				}
+			}
+		}
+		return InteractionResult.FAIL;
 	}
 
 }
