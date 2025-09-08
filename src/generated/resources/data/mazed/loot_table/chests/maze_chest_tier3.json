@@ -1,11 +1,5 @@
 {
   "type": "minecraft:chest",
-  "functions": [
-    {
-      "function": "minecraft:enchant_randomly",
-      "options": "minecraft:efficiency"
-    }
-  ],
   "pools": [
     {
       "bonus_rolls": 0.0,
@@ -17,6 +11,12 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:iron_ingot"
+        }
+      ],
+      "functions": [
+        {
+          "function": "minecraft:enchant_randomly",
+          "options": "minecraft:efficiency"
         }
       ],
       "rolls": {

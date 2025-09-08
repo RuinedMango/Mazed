@@ -1,6 +1,8 @@
-// 1.21.8	2025-09-01T02:02:43.5648211	Model Definitions - mazed
+// 1.21.8	2025-09-07T16:39:44.4371442	Model Definitions - mazed
+709bfbd21ec6e8f744ef1246ef7ce78adc6f0b4d assets/mazed/blockstates/exit_maze_portal.json
 94e0a8a805711a5f247ab04048349f838b1402b3 assets/mazed/blockstates/maze_portal.json
 7a44678cb963f0b766cde7791dbfeb509f99937b assets/mazed/items/maze_portal.json
 cc6156858e7cbfda5c2ade090843d2da991eeaec assets/mazed/items/maze_rod.json
+c4b51f0fe22b5a72bca637e6b53092d12653d48c assets/mazed/models/block/exit_maze_portal.json
 5844e1b424b0e2438c92e72171fe689d39482caa assets/mazed/models/block/maze_portal.json
 b5dee5af25015a10324aa3521a3efd916ac82de9 assets/mazed/models/item/maze_rod.json

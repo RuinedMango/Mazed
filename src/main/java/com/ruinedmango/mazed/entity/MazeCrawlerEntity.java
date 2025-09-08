@@ -23,7 +23,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LeapAtTargetGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
@@ -35,7 +34,6 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WallClimberNavigation;
 import net.minecraft.world.entity.animal.IronGolem;
-import net.minecraft.world.entity.animal.armadillo.Armadillo;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -43,7 +41,6 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.common.CommonHooks;
 
 public class MazeCrawlerEntity extends Monster {
 	private static final EntityDataAccessor<Byte> DATA_FLAGS_ID = SynchedEntityData.defineId(MazeCrawlerEntity.class,
@@ -56,13 +53,11 @@ public class MazeCrawlerEntity extends Monster {
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(1, new FloatGoal(this));
-		this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, Armadillo.class, 6.0F, 1.0, 1.2,
-				p_320185_ -> !((Armadillo) p_320185_).isScared()));
-		this.goalSelector.addGoal(3, new LeapAtTargetGoal(this, 0.4F));
-		this.goalSelector.addGoal(4, new MazeCrawlerEntity.MazeCrawlerAttackGoal(this));
-		this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 0.8));
-		this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
-		this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
+		this.goalSelector.addGoal(2, new LeapAtTargetGoal(this, 0.4F));
+		this.goalSelector.addGoal(3, new MazeCrawlerEntity.MazeCrawlerAttackGoal(this));
+		this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.8));
+		this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 12.0F));
+		this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
 		this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
 		this.targetSelector.addGoal(2, new MazeCrawlerEntity.MazeCrawlerTargetGoal<>(this, Player.class));
 		this.targetSelector.addGoal(3, new MazeCrawlerEntity.MazeCrawlerTargetGoal<>(this, IronGolem.class));
@@ -88,7 +83,8 @@ public class MazeCrawlerEntity extends Monster {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
-		return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 16.0).add(Attributes.MOVEMENT_SPEED, 0.3F);
+		return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 19.0).add(Attributes.MOVEMENT_SPEED, 0.75F)
+				.add(Attributes.ATTACK_DAMAGE, 3.0);
 	}
 
 	@Override
@@ -125,7 +121,7 @@ public class MazeCrawlerEntity extends Monster {
 
 	@Override
 	public boolean canBeAffected(MobEffectInstance potionEffect) {
-		return potionEffect.is(MobEffects.POISON) ? false : CommonHooks.canMobEffectBeApplied(this, potionEffect, null);
+		return potionEffect.is(MobEffects.POISON) ? false : super.canBeAffected(potionEffect);
 	}
 
 	public boolean isClimbing() {
@@ -191,13 +187,7 @@ public class MazeCrawlerEntity extends Monster {
 
 		@Override
 		public boolean canContinueToUse() {
-			float f = this.mob.getLightLevelDependentMagicValue();
-			if (f >= 0.5F && this.mob.getRandom().nextInt(100) == 0) {
-				this.mob.setTarget(null);
-				return false;
-			} else {
-				return super.canContinueToUse();
-			}
+			return super.canContinueToUse();
 		}
 	}
 
@@ -221,7 +211,7 @@ public class MazeCrawlerEntity extends Monster {
 
 	static class MazeCrawlerTargetGoal<T extends LivingEntity> extends NearestAttackableTargetGoal<T> {
 		public MazeCrawlerTargetGoal(MazeCrawlerEntity mazeCrawlerEntity, Class<T> entityTypeToTarget) {
-			super(mazeCrawlerEntity, entityTypeToTarget, true);
+			super(mazeCrawlerEntity, entityTypeToTarget, false);
 		}
 
 		@Override

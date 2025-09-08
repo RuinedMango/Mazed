@@ -21,5 +21,6 @@ public class MazedModelProvider extends ModelProvider {
 		itemModels.generateFlatItem(ItemRegistry.MAZE_ROD.get(), ModelTemplates.FLAT_ITEM);
 
 		blockModels.createTrivialCube(BlockRegistry.MAZE_PORTAL.get());
+		blockModels.createTrivialCube(BlockRegistry.EXIT_MAZE_PORTAL.get());
 	}
 }

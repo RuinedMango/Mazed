@@ -1,8 +1,8 @@
-// 1.21.8	2025-09-02T23:44:45.5291175	Loot Tables
-35661a170178d4b6c07ce43db46617a6948d38d1 data/mazed/loot_table/chests/maze_chest_tier1.json
+// 1.21.8	2025-09-07T16:39:44.4391534	Loot Tables
+8da5fed03c92e2a01ba6bee7e3569f01a15615d8 data/mazed/loot_table/chests/maze_chest_tier1.json
 1df7713901672d81ca9621c569074455cce85857 data/mazed/loot_table/chests/maze_chest_tier2.json
-78b0dae0d4208586030780a5d8949d421a2c3a72 data/mazed/loot_table/chests/maze_chest_tier3.json
+09228f37f9507248916803f133ef75a6f62c6d72 data/mazed/loot_table/chests/maze_chest_tier3.json
 14728bc7aa63b8af5239bb4d2d8f1c0988e718ff data/mazed/loot_table/chests/maze_chest_tier4.json
-ed5785d6b13b32dbb6dda5ac990df3c3397108cf data/mazed/loot_table/chests/maze_chest_tier5.json
+32c3d4980d76cc17387cbccfd842ee58c5af3786 data/mazed/loot_table/chests/maze_chest_tier5.json
 92f7fb1609a15880eac1fd46d31abdba0b46bcd9 data/mazed/loot_table/chests/maze_chest_tier6.json
 104c090aebcabcbf53d5f2dccb28a06ffe3d4f6e data/mazed/loot_table/chests/super_maze_barrel.json

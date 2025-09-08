@@ -30,18 +30,24 @@
   "has_precipitation": true,
   "spawn_costs": {},
   "spawners": {
-    "ambient": [
-      {
-        "type": "minecraft:bat",
-        "maxCount": 8,
-        "minCount": 8,
-        "weight": 10
-      }
-    ],
+    "ambient": [],
     "axolotls": [],
     "creature": [],
     "misc": [],
-    "monster": [],
+    "monster": [
+		{
+		  "type": "mazed:mazecrawler",
+		  "maxCount": 16000,
+		  "minCount": 4,
+		  "weight": 100
+		},
+		{
+		  "type": "mazed:mazespectre",
+		  "maxCount": 16000,
+		  "minCount": 4,
+		  "weight": 80
+		}
+	],
     "underground_water_creature": [],
     "water_ambient": [],
     "water_creature": []

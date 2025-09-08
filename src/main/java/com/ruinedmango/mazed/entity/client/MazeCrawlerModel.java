@@ -18,12 +18,6 @@ public class MazeCrawlerModel extends EntityModel<LivingEntityRenderState> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
 			ResourceLocation.fromNamespaceAndPath(Mazed.MODID, "mazecrawler"), "main");
 
-	private static final String BODY_0 = "body0";
-	private static final String BODY_1 = "body1";
-	private static final String RIGHT_MIDDLE_FRONT_LEG = "right_middle_front_leg";
-	private static final String LEFT_MIDDLE_FRONT_LEG = "left_middle_front_leg";
-	private static final String RIGHT_MIDDLE_HIND_LEG = "right_middle_hind_leg";
-	private static final String LEFT_MIDDLE_HIND_LEG = "left_middle_hind_leg";
 	private final ModelPart head;
 	private final ModelPart rightHindLeg;
 	private final ModelPart leftHindLeg;

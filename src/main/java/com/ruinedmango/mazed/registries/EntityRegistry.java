@@ -4,6 +4,7 @@ import java.util.function.Supplier;
 
 import com.ruinedmango.mazed.Mazed;
 import com.ruinedmango.mazed.entity.MazeCrawlerEntity;
+import com.ruinedmango.mazed.entity.MazeSpectreEntity;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -20,10 +21,15 @@ public class EntityRegistry {
 
 	public static ResourceKey<EntityType<?>> MAZECRAWLER_KEY = ResourceKey.create(Registries.ENTITY_TYPE,
 			ResourceLocation.fromNamespaceAndPath("mazed", "mazecrawler"));
+	public static ResourceKey<EntityType<?>> MAZESPECTRE_KEY = ResourceKey.create(Registries.ENTITY_TYPE,
+			ResourceLocation.fromNamespaceAndPath("mazed", "mazespectre"));
 
 	public static final Supplier<EntityType<MazeCrawlerEntity>> MAZECRAWLER = REGISTER.register("mazecrawler",
 			() -> EntityType.Builder.of(MazeCrawlerEntity::new, MobCategory.MONSTER).sized(0.75f, 0.35f)
 					.build(MAZECRAWLER_KEY));
+	public static final Supplier<EntityType<MazeSpectreEntity>> MAZESPECTRE = REGISTER.register("mazespectre",
+			() -> EntityType.Builder.of(MazeSpectreEntity::new, MobCategory.MONSTER).sized(0.75f, 0.35f)
+					.build(MAZESPECTRE_KEY));
 
 	public static void register(IEventBus eventBus) {
 		REGISTER.register(eventBus);

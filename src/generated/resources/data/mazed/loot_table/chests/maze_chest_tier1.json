@@ -1,11 +1,5 @@
 {
   "type": "minecraft:chest",
-  "functions": [
-    {
-      "function": "minecraft:enchant_randomly",
-      "options": "minecraft:unbreaking"
-    }
-  ],
   "pools": [
     {
       "bonus_rolls": 0.0,
@@ -49,6 +43,12 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:wooden_pickaxe"
+        }
+      ],
+      "functions": [
+        {
+          "function": "minecraft:enchant_randomly",
+          "options": "minecraft:unbreaking"
         }
       ],
       "rolls": {

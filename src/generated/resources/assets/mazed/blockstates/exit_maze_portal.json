@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "mazed:block/exit_maze_portal"
+    }
+  }
+}

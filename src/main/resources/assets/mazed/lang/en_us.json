@@ -3,6 +3,8 @@
   "block.mazed.maze_portal": "Maze Portal",
   "block.mazed.exit_maze_portal": "Exit Maze Portal",
   "item.mazed.maze_rod": "Maze Rod",
+  "entity.mazed.mazecrawler": "Maze Crawler",
+  "entity.mazed.mazespectre": "Maze Spectre",
 
   "mazed.configuration.title": "Mazed Configs",
   "mazed.configuration.section.mazed.common.toml": "Mazed Configs",
